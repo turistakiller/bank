@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer to Wasley Araujo dos Santos</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2, h3 {
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        #progress-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #progress-bar {
+            width: 0;
+            height: 20px;
+            background-color: #4caf50;
+            border-radius: 5px;
+        }
+
+        #transfer-button {
+            display: block;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #history-container {
+            margin-top: 20px;
+        }
+
+        .transfer-history {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .transfer-history span {
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Transfer to Wasley Araujo dos Santos</h2>
+
+        <div id="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+
+        <button id="transfer-button" onclick="startTransfer()">Start Transfer</button>
+
+        <div id="history-container">
+            <h3>Transfer History</h3>
+            <div id="transfer-history"></div>
+        </div>
+    </div>
+
+    <script>
+        function startTransfer() {
+            document.getElementById("progress-container").style.display = "block";
+            document.getElementById("transfer-button").disabled = true;
+
+            let progressBar = document.getElementById("progress-bar");
+            let historyContainer = document.getElementById("transfer-history");
+
+            let progress = 0;
+
+            let transferAmount = getRandomAmount(10, 150);
+
+            let transferInterval = setInterval(function() {
+                if (progress >= 100) {
+                    clearInterval(transferInterval);
+                    document.getElementById("transfer-button").disabled = false;
+
+                    // Set the time zone to America/Los_Angeles (California)
+                    let now = new Date();
+                    let options = { timeZone: 'America/Los_Angeles' };
+                    let timestamp = now.toLocaleString('en-US', options);
+
+                    historyContainer.innerHTML += `<div class="transfer-history">
+                                                        <span>Transferred $${transferAmount.toFixed(2)} to Wasley Araujo dos Santos</span>
+                                                        <span>${timestamp}</span>
+                                              </div>`;
+                } else {
+                    progress += 10;
+                    progressBar.style.width = progress + "%";
+                }
+            }, 500);
+        }
+
+        function getRandomAmount(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+    </script>
+
+</body>
+</html>
