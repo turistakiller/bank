@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transfer to Wasley Araujo dos Santos</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f2f2f2;
+        .alert {
+            background-color: #f44336;
+            color: white;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
         }
-
         .container {
+            width: 90%;
             max-width: 600px;
             margin: 20px auto;
             padding: 20px;
@@ -25,6 +24,10 @@
             color: #333;
             font-weight: bold;
             margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 17px;
         }
 
         #progress-container {
@@ -73,58 +76,71 @@
 </head>
 <body>
 
-    <div class="container">
-        <h2>Transfer to Wasley Araujo dos Santos</h2>
+<div class="container">
+    <h2>Transfer to Wasley Araujo dos Santos</h2>
 
-        <div id="progress-container">
-            <div id="progress-bar"></div>
-        </div>
-
-        <button id="transfer-button" onclick="startTransfer()">Start Transfer</button>
-
-        <div id="history-container">
-            <h3>Transfer History</h3>
-            <div id="transfer-history"></div>
-        </div>
+    <div id="progress-container">
+        <div id="progress-bar"></div>
     </div>
 
-    <script>
-        function startTransfer() {
-            document.getElementById("progress-container").style.display = "block";
-            document.getElementById("transfer-button").disabled = true;
+    <button id="transfer-button" onclick="startTransfer()">Start Transfer</button>
 
-            let progressBar = document.getElementById("progress-bar");
-            let historyContainer = document.getElementById("transfer-history");
+    <div id="history-container">
+        <h3>Transfer History</h3>
+        <div id="transfer-history"></div>
+    </div>
+</div>
 
-            let progress = 0;
+<script>
+    const monthlyLimit = 50; // Monthly transfer limit
 
-            let transferAmount = getRandomAmount(10, 150);
+    function startTransfer() {
+        let transferAmount = getRandomAmount(10, 150);
 
-            let transferInterval = setInterval(function() {
-                if (progress >= 100) {
-                    clearInterval(transferInterval);
-                    document.getElementById("transfer-button").disabled = false;
-
-                    // Set the time zone to America/Los_Angeles (California)
-                    let now = new Date();
-                    let options = { timeZone: 'America/Los_Angeles' };
-                    let timestamp = now.toLocaleString('en-US', options);
-
-                    historyContainer.innerHTML += `<div class="transfer-history">
-                                                        <span>Transferred $${transferAmount.toFixed(2)} to Wasley Araujo dos Santos</span>
-                                                        <span>${timestamp}</span>
-                                              </div>`;
-                } else {
-                    progress += 10;
-                    progressBar.style.width = progress + "%";
-                }
-            }, 500);
+        // Check if the transfer amount exceeds the monthly limit
+        if (transferAmount > monthlyLimit) {
+            showErrorMessage("The monthly limit has been exceeded while performing the transfer.");
+            return;
         }
 
-        function getRandomAmount(min, max) {
-            return Math.random() * (max - min) + min;
-        }
-    </script>
+        document.getElementById("progress-container").style.display = "block";
+        document.getElementById("transfer-button").disabled = true;
+
+        let progressBar = document.getElementById("progress-bar");
+        let historyContainer = document.getElementById("transfer-history");
+
+        let progress = 0;
+
+        let transferInterval = setInterval(function() {
+            if (progress >= 100) {
+                clearInterval(transferInterval);
+                document.getElementById("transfer-button").disabled = false;
+
+                // Set the time zone to America/Los_Angeles (California)
+                let now = new Date();
+                let options = { timeZone: 'America/Los_Angeles' };
+                let timestamp = now.toLocaleString('en-US', options);
+
+                historyContainer.innerHTML += `<div class="transfer-history">
+                                                    <span>Transferred $${transferAmount.toFixed(2)} to Wasley Araujo dos Santos</span>
+                                                    <span>${timestamp}</span>
+                                          </div>`;
+            } else {
+                progress += 10;
+                progressBar.style.width = progress + "%";
+            }
+        }, 500);
+    }
+
+    function getRandomAmount(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+    function showErrorMessage(message) {
+        let alertContainer = document.getElementById("history-container");
+        alertContainer.innerHTML = `<div class="alert">${message}</div>`;
+    }
+</script>
 
 </body>
 </html>
