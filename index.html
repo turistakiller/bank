@@ -92,13 +92,13 @@
 </div>
 
 <script>
-    const monthlyLimit = 1000; // Monthly transfer limit
+    const monthlyLimit = 10000; // Monthly transfer limit
 
     function startTransfer() {
         let transferAmount = getRandomAmount(200, 250);
 
         // Check if the transfer amount exceeds the monthly limit
-        if (transferAmount < monthlyLimit) {
+        if (transferAmount > monthlyLimit) {
             showErrorMessage("The monthly limit has been exceeded while performing the transfer.");
             return;
         }
