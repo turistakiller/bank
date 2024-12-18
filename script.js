@@ -7,5 +7,5 @@ function confirmAgreement() {
   setTimeout(() => {
     loader.classList.add("hidden");
     alert("Parabéns! Você aceitou o acordo. Entraremos em contato para finalizar.");
-  }, 3000);
+  }, 30000);
 }
