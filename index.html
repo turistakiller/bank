@@ -1,146 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        .alert {
-            background-color: #f44336;
-            color: white;
-            padding: 10px;
-            margin-bottom: 15px;
-            border-radius: 5px;
-        }
-        .container {
-            width: 90%;
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h2, h3 {
-            color: #333;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        h2 {
-            font-size: 17px;
-        }
-
-        #progress-container {
-            display: none;
-            margin-top: 20px;
-        }
-
-        #progress-bar {
-            width: 0;
-            height: 20px;
-            background-color: #4caf50;
-            border-radius: 5px;
-        }
-
-        #transfer-button {
-            display: block;
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #4caf50;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        #history-container {
-            margin-top: 20px;
-        }
-
-        .transfer-history {
-            margin-bottom: 10px;
-            padding: 10px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .transfer-history span {
-            font-size: 14px;
-            color: #555;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Renegociação de Dívida - Banco</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <header>
+    <h1>Banco XYZ</h1>
+    <p>Renegocie sua dívida com condições imperdíveis!</p>
+  </header>
+  
+  <main>
+    <section class="debt-details">
+      <h2>Detalhes da Dívida</h2>
+      <p><strong>Valor Total da Dívida:</strong> R$ 235.869,61</p>
+      <p><strong>Desconto Aplicado:</strong> 97% (-R$ 228.050,78)</p>
+      <p><strong>Valor Final do Acordo:</strong> <span class="highlight">R$ 7.818,83</span></p>
+    </section>
+    
+    <section class="agreement">
+      <h2>Finalize Seu Acordo</h2>
+      <p>Confirme o acordo para regularizar sua situação.</p>
+      <button onclick="confirmAgreement()">Aceitar Acordo</button>
+    </section>
+  </main>
+  
+  <footer>
+    <p>© 2024 Banco XYZ. Todos os direitos reservados.</p>
+    <p>Contato: 0800-123-456</p>
+  </footer>
 
-<div class="container">
-    <h2>Transfer to WASLEY A. S.</h2>
-
-    <div id="progress-container">
-        <div id="progress-bar"></div>
-    </div>
-
-    <button id="transfer-button" onclick="startTransfer()">Start Transfer</button>
-
-    <div id="history-container">
-        <h3>Transfer History</h3>
-        <div id="transfer-history"></div>
-    </div>
-</div>
-
-<script>
-    const monthlyLimit = 10000; // Monthly transfer limit
-
-    function startTransfer() {
-        let transferAmount = getRandomAmount(200, 250);
-
-        // Check if the transfer amount exceeds the monthly limit
-        if (transferAmount > monthlyLimit) {
-            showErrorMessage("The monthly limit has been exceeded while performing the transfer.");
-            return;
-        }
-
-        document.getElementById("progress-container").style.display = "block";
-        document.getElementById("transfer-button").disabled = true;
-
-        let progressBar = document.getElementById("progress-bar");
-        let historyContainer = document.getElementById("transfer-history");
-
-        let progress = 0;
-
-        let transferInterval = setInterval(function() {
-            if (progress >= 100) {
-                clearInterval(transferInterval);
-                document.getElementById("transfer-button").disabled = false;
-
-                // Set the time zone to America/Los_Angeles (California)
-                let now = new Date();
-                let options = { timeZone: 'America/Los_Angeles' };
-                let timestamp = now.toLocaleString('en-US', options);
-
-                historyContainer.innerHTML += `<div class="transfer-history">
-                                                    <span>Transferred $${transferAmount.toFixed(2)} to Wasley Araujo dos Santos</span>
-                                                    <span>${timestamp}</span>
-                                          </div>`;
-            } else {
-                progress += 10;
-                progressBar.style.width = progress + "%";
-            }
-        }, 500);
-    }
-
-    function getRandomAmount(min, max) {
-        return Math.random() * (max - min) + min;
-    }
-
-    function showErrorMessage(message) {
-        let alertContainer = document.getElementById("history-container");
-        alertContainer.innerHTML = `<div class="alert">${message}</div>`;
-    }
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
