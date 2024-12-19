@@ -88,16 +88,18 @@
 
     <section class="installment-options">
       <h2>Opções de Parcelamento</h2>
-      <p><strong>Valor Final do Acordo com Parcelamento:</strong> R$ 16.000,00</p>
+      <p><strong>Valor Final do Acordo com Parcelamento:</strong> R$ 15.999,94</p>
+      <p><strong>Entrada Obrigatória:</strong> R$ 1.050,00</p>
       <label for="installments">Selecione o número de parcelas:</label>
       <select id="installments" onchange="calculateInstallment()">
         <option value="" disabled selected>Escolha...</option>
-        <option value="1">1x (R$ 16.000,00)</option>
-        <option value="2">2x (R$ 8.000,00)</option>
-        <option value="3">3x (R$ 5.333,33)</option>
-        <option value="6">6x (R$ 2.666,67)</option>
-        <option value="12">12x (R$ 1.333,33)</option>
-        <option value="25">25x (R$ 640,00)</option>
+        <!-- Opções de parcelamento de 1 a 25 -->
+        <option value="1">1x</option>
+        <option value="2">2x</option>
+        <option value="3">3x</option>
+        <option value="6">6x</option>
+        <option value="12">12x</option>
+        <option value="25">25x</option>
       </select>
       <p id="installment-result"></p>
     </section>
@@ -116,14 +118,23 @@
 
   <script>
     function calculateInstallment() {
-      const totalAmount = 16000; // Valor final com parcelamento
+      const totalAmount = 15999.94; // Valor total
+      const entryAmount = 1050; // Valor da entrada obrigatória
+      const remainingAmount = totalAmount - entryAmount; // Valor restante para parcelar
+
       const selectElement = document.getElementById("installments");
       const installments = parseInt(selectElement.value); // Número de parcelas
-      const installmentValue = (totalAmount / installments).toFixed(2); // Valor de cada parcela
+      const installmentValue = (remainingAmount / installments).toFixed(2); // Valor de cada parcela
 
       // Exibe o resultado
       const resultElement = document.getElementById("installment-result");
-      resultElement.textContent = `Você escolheu ${installments}x de R$ ${installmentValue.replace(".", ",")}.`;
+      resultElement.textContent = `Com entrada de R$ ${entryAmount.toFixed(2).replace(
+        ".",
+        ","
+      )}, o restante será parcelado em ${installments}x de R$ ${installmentValue.replace(
+        ".",
+        ","
+      )}.`;
     }
 
     function confirmAgreement() {
