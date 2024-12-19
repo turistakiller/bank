@@ -37,7 +37,7 @@
       font-weight: bold;
     }
 
-    #installments {
+    #installments, #entry-date, #first-installment-date {
       margin: 10px 0;
       padding: 5px;
       font-size: 16px;
@@ -90,10 +90,16 @@
       <h2>Opções de Parcelamento</h2>
       <p><strong>Valor Final do Acordo com Parcelamento:</strong> R$ 15.999,94</p>
       <p><strong>Entrada Obrigatória:</strong> R$ 1.050,00</p>
+      
+      <label for="entry-date">Escolha a data da entrada:</label>
+      <input type="date" id="entry-date">
+      
+      <label for="first-installment-date">Escolha a data da 1ª parcela:</label>
+      <input type="date" id="first-installment-date">
+      
       <label for="installments">Selecione o número de parcelas:</label>
       <select id="installments" onchange="calculateInstallment()">
         <option value="" disabled selected>Escolha...</option>
-        <!-- Opções de parcelamento de 1 a 25 -->
         <option value="1">1x</option>
         <option value="2">2x</option>
         <option value="3">3x</option>
@@ -138,7 +144,17 @@
     }
 
     function confirmAgreement() {
-      alert("Parabéns! Você aceitou o acordo. Entraremos em contato para finalizar.");
+      const entryDate = document.getElementById("entry-date").value;
+      const firstInstallmentDate = document.getElementById("first-installment-date").value;
+
+      if (!entryDate || !firstInstallmentDate) {
+        alert("Por favor, selecione as datas da entrada e da primeira parcela.");
+        return;
+      }
+
+      alert(
+        `Acordo confirmado! A entrada será paga em ${entryDate}, e a primeira parcela será em ${firstInstallmentDate}.`
+      );
     }
   </script>
 </body>
