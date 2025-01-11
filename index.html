@@ -107,11 +107,6 @@
       text-align: center;
     }
 
-    .modal-content img {
-      max-width: 100%;
-      height: auto;
-    }
-
     .modal-content p {
       font-size: 16px;
       margin: 10px 0;
@@ -142,12 +137,22 @@
   <main>
     <section class="debt-details">
       <h2>Detalhes da Dívida</h2>
-      <p><strong>Valor Total da Dívida:</strong> R$ 235.869,61</p>
-      <p><strong>Desconto Aplicado:</strong> 97% (-R$ 228.050,78)</p>
-      <p><strong>Valor Final do Acordo:</strong> <span class="highlight">R$ 7.818,83</span></p>
+      <p><strong>Valor Total da Dívida:</strong> R$ 15.999,94</p>
+      <p><strong>Entrada Obrigatória:</strong> R$ 1.050,00</p>
     </section>
 
-    <section class="boleto-container" id="boleto-container">
+    <section class="agreement">
+      <h2>Finalize Seu Acordo</h2>
+      <label for="entry-date">Data da entrada:</label>
+      <input type="date" id="entry-date">
+      
+      <label for="first-installment-date">Data da 1ª parcela:</label>
+      <input type="date" id="first-installment-date">
+      
+      <button onclick="generateBoletos()">Confirmar e Gerar Boletos</button>
+    </section>
+
+    <section class="boleto-container" id="boleto-container" style="display: none;">
       <h2>Boletos Gerados</h2>
       <p>Confira abaixo os links para os boletos:</p>
       <div id="boleto-links"></div>
@@ -163,34 +168,53 @@
   <div id="boletoModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
-      <h2>Boleto de Pagamento</h2>
-      <p>Código de barras: <span id="barcode"></span></p>
-      <p>QR Code para pagamento via Pix:</p>
-      <img id="qrcode" src="" alt="QR Code">
+      <h2>Informações do Boleto</h2>
+      <p id="boleto-info"></p>
     </div>
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      generateBoletos();
-    });
-
     function generateBoletos() {
-      const boletoLinks = document.getElementById("boleto-links");
+      const entryAmount = 1050; // Valor da entrada
+      const totalAmount = 15999.94;
+      const installmentAmount = (totalAmount - entryAmount) / 25;
+      const entryDate = document.getElementById("entry-date").value;
+      const firstInstallmentDate = document.getElementById("first-installment-date").value;
 
-      for (let i = 1; i <= 25; i++) {
-        const boletoLink = document.createElement("a");
-        boletoLink.href = "#";
-        boletoLink.textContent = `Boleto ${i}`;
-        boletoLink.className = "boleto-link";
-        boletoLink.onclick = () => showModal(`000000000000000${i}`, `https://via.placeholder.com/200/0000FF/FFFFFF?text=PIX+Boleto+${i}`);
-        boletoLinks.appendChild(boletoLink);
+      if (!entryDate || !firstInstallmentDate) {
+        alert("Por favor, selecione as datas da entrada e da primeira parcela.");
+        return;
       }
+
+      const boletoLinks = document.getElementById("boleto-links");
+      boletoLinks.innerHTML = ""; // Limpar links existentes
+
+      // Gerar boleto da entrada
+      createBoletoLink(1, entryAmount, entryDate);
+
+      // Gerar boletos das parcelas
+      let installmentDate = new Date(firstInstallmentDate);
+      for (let i = 2; i <= 26; i++) {
+        const formattedDate = installmentDate.toISOString().split("T")[0];
+        createBoletoLink(i, installmentAmount, formattedDate);
+        installmentDate.setMonth(installmentDate.getMonth() + 1); // Próximo mês
+      }
+
+      document.getElementById("boleto-container").style.display = "block";
     }
 
-    function showModal(barcode, qrcodeSrc) {
-      document.getElementById("barcode").textContent = barcode;
-      document.getElementById("qrcode").src = qrcodeSrc;
+    function createBoletoLink(number, amount, date) {
+      const boletoLinks = document.getElementById("boleto-links");
+      const link = document.createElement("a");
+      link.href = "#";
+      link.className = "boleto-link";
+      link.textContent = `Boleto ${number} - R$ ${amount.toFixed(2).replace(".", ",")} (Venc.: ${date})`;
+      link.onclick = () => showModal(`Boleto ${number}: R$ ${amount.toFixed(2).replace(".", ",")} - Vencimento: ${date}`);
+      boletoLinks.appendChild(link);
+    }
+
+    function showModal(info) {
+      document.getElementById("boleto-info").textContent = info;
       document.getElementById("boletoModal").style.display = "block";
     }
 
