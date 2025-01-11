@@ -24,7 +24,7 @@
       padding: 20px;
     }
 
-    .debt-details, .installment-options, .agreement, .boleto-container {
+    .debt-details, .agreement, .boleto-container {
       background: #fff;
       border: 1px solid #ccc;
       border-radius: 8px;
@@ -35,18 +35,6 @@
     .highlight {
       color: #d9534f;
       font-weight: bold;
-    }
-
-    #installments, #entry-date, #first-installment-date {
-      margin: 10px 0;
-      padding: 5px;
-      font-size: 16px;
-    }
-
-    #installment-result {
-      margin-top: 10px;
-      font-weight: bold;
-      color: #004aad;
     }
 
     button {
@@ -104,12 +92,22 @@
       border-radius: 10px;
       width: 80%;
       max-width: 500px;
-      text-align: center;
+      text-align: left;
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
     }
 
     .modal-content p {
       font-size: 16px;
-      margin: 10px 0;
+      margin: 5px 0;
+    }
+
+    .modal-content img {
+      margin-top: 10px;
+      width: 150px;
+      height: 150px;
     }
 
     .close {
@@ -169,7 +167,12 @@
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
       <h2>Informações do Boleto</h2>
-      <p id="boleto-info"></p>
+      <p><strong>Número do Boleto:</strong> <span id="modal-boleto-number"></span></p>
+      <p><strong>Valor:</strong> R$ <span id="modal-boleto-amount"></span></p>
+      <p><strong>Vencimento:</strong> <span id="modal-boleto-date"></span></p>
+      <p><strong>Código de Barras:</strong> <span id="modal-boleto-barcode"></span></p>
+      <p><strong>QR Code para PIX:</strong></p>
+      <img id="modal-boleto-qrcode" src="" alt="QR Code">
     </div>
   </div>
 
@@ -209,12 +212,24 @@
       link.href = "#";
       link.className = "boleto-link";
       link.textContent = `Boleto ${number} - R$ ${amount.toFixed(2).replace(".", ",")} (Venc.: ${date})`;
-      link.onclick = () => showModal(`Boleto ${number}: R$ ${amount.toFixed(2).replace(".", ",")} - Vencimento: ${date}`);
+      link.onclick = () => showModal(number, amount, date, generateBarcode(), generateQRCode(amount));
       boletoLinks.appendChild(link);
     }
 
-    function showModal(info) {
-      document.getElementById("boleto-info").textContent = info;
+    function generateBarcode() {
+      return "12345.67890 12345.678901 12345.678901 1 23456789012345"; // Simulação
+    }
+
+    function generateQRCode(amount) {
+      return `https://api.qrserver.com/v1/create-qr-code/?data=PIX:${amount}&size=150x150`; // Exemplo para QR Code
+    }
+
+    function showModal(number, amount, date, barcode, qrcode) {
+      document.getElementById("modal-boleto-number").textContent = number;
+      document.getElementById("modal-boleto-amount").textContent = amount.toFixed(2).replace(".", ",");
+      document.getElementById("modal-boleto-date").textContent = date;
+      document.getElementById("modal-boleto-barcode").textContent = barcode;
+      document.getElementById("modal-boleto-qrcode").src = qrcode;
       document.getElementById("boletoModal").style.display = "block";
     }
 
