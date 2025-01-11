@@ -24,7 +24,7 @@
       padding: 20px;
     }
 
-    .debt-details, .installment-options, .agreement {
+    .debt-details, .installment-options, .agreement, .boleto-container {
       background: #fff;
       border: 1px solid #ccc;
       border-radius: 8px;
@@ -69,6 +69,18 @@
       text-align: center;
       padding: 10px;
       margin-top: 20px;
+    }
+
+    .boleto-link {
+      display: block;
+      margin: 5px 0;
+      text-decoration: none;
+      color: #004aad;
+      font-weight: bold;
+    }
+
+    .boleto-link:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -115,6 +127,12 @@
       <p>Confirme o acordo para regularizar sua situação.</p>
       <button onclick="confirmAgreement()">Aceitar Acordo</button>
     </section>
+
+    <section class="boleto-container" id="boleto-container" style="display: none;">
+      <h2>Boletos Gerados</h2>
+      <p>Confira abaixo os links para os boletos:</p>
+      <div id="boleto-links"></div>
+    </section>
   </main>
   
   <footer>
@@ -155,6 +173,24 @@
       alert(
         `Acordo confirmado! A entrada será paga em ${entryDate}, e a primeira parcela será em ${firstInstallmentDate}.`
       );
+
+      generateBoletos();
+    }
+
+    function generateBoletos() {
+      const boletoContainer = document.getElementById("boleto-container");
+      const boletoLinks = document.getElementById("boleto-links");
+
+      boletoLinks.innerHTML = ""; // Limpa os boletos existentes
+      for (let i = 1; i <= 25; i++) {
+        const boletoLink = document.createElement("a");
+        boletoLink.href = `#boleto${i}`;
+        boletoLink.textContent = `Boleto ${i}`;
+        boletoLink.className = "boleto-link";
+        boletoLinks.appendChild(boletoLink);
+      }
+
+      boletoContainer.style.display = "block"; // Exibe a seção de boletos
     }
   </script>
 </body>
