@@ -29,6 +29,7 @@
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             padding: 20px;
+            overflow: hidden;
         }
 
         .header {
@@ -114,6 +115,7 @@
         .actions {
             display: flex;
             justify-content: space-between;
+            gap: 10px;
         }
 
         .btn {
@@ -135,6 +137,62 @@
         .btn:active {
             background-color: #1c7430;
         }
+
+        /* Media Queries para responsividade */
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .user-info {
+                text-align: left;
+                margin-top: 10px;
+            }
+
+            .transactions li {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-bottom: 10px;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .card {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .amount {
+                font-size: 2em;
+            }
+
+            .saldo h2 {
+                font-size: 1.2em;
+            }
+
+            .transactions li {
+                font-size: 0.9em;
+            }
+
+            .user-info p {
+                font-size: 1em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -144,7 +202,7 @@
                 <img src="https://via.placeholder.com/100x40?text=Banco" alt="Logo Banco">
             </div>
             <div class="user-info">
-                <p>Olá, <strong>João Silva</strong></p>
+                <p>Olá, <strong>Wasley Araújo</strong></p>
                 <button class="logout-btn">Sair</button>
             </div>
         </header>
