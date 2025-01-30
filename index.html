@@ -3,20 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saldo Pipay</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Interface Bancária</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin-top: 50px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            width: 90%;
+            max-width: 900px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .logo img {
+            max-width: 100px;
+        }
+
+        .user-info {
+            text-align: right;
+        }
+
+        .user-info p {
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        .logout-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .card {
+            background-color: #007BFF;
+            color: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .saldo h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .amount {
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
+        .transactions ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        .transactions li {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .date {
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        .transaction-description {
+            color: #333;
+        }
+
+        .transaction-amount {
+            font-weight: bold;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            width: 48%;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #218838;
+        }
+
+        .btn:active {
+            background-color: #1c7430;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Pipay</h1>
-        </header>
-        <div class="content">
-            <h2>Saldo Disponível</h2>
-            <div class="balance">
-                <p>R$ 108,00</p>
+        <header class="header">
+            <div class="logo">
+                <img src="https://via.placeholder.com/100x40?text=Banco" alt="Logo Banco">
             </div>
-        </div>
+            <div class="user-info">
+                <p>Olá, <strong>João Silva</strong></p>
+                <button class="logout-btn">Sair</button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="card saldo">
+                <h2>Saldo Disponível</h2>
+                <p class="amount">R$ 108,00</p>
+            </div>
+
+            <div class="transactions">
+                <h3>Transações Recentes</h3>
+                <ul>
+                    <li><span class="date">28/01/2025</span><span class="transaction-description">Transferência para Maria</span><span class="transaction-amount">- R$ 50,00</span></li>
+                    <li><span class="date">25/01/2025</span><span class="transaction-description">Recebimento de Cliente</span><span class="transaction-amount">+ R$ 100,00</span></li>
+                    <li><span class="date">20/01/2025</span><span class="transaction-description">Pagamento de Fatura</span><span class="transaction-amount">- R$ 30,00</span></li>
+                </ul>
+            </div>
+
+            <div class="actions">
+                <button class="btn">Depositar</button>
+                <button class="btn">Transferir</button>
+            </div>
+        </main>
     </div>
 </body>
 </html>
