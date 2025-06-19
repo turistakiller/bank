@@ -23,9 +23,16 @@ body {
   padding: 24px;
 }
 
+.logo {
+  width: 140px;
+  margin: 0 auto 12px auto;
+  display: block;
+}
+
 header h1 {
   font-size: 24px;
   color: #10c86e;
+  text-align: center;
   margin-bottom: 20px;
 }
 
