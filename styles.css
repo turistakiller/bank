@@ -69,3 +69,21 @@ header h1 {
 .acoes button:hover {
   background-color: #0fa35a;
 }
+
+.retirada-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.aviso {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #e17055;
+  background-color: #fff5f0;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ffe0d4;
+  width: 100%;
+  text-align: center;
+}
