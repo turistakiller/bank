@@ -1,69 +1,29 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transferência de Arquivos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-        .container {
-            width: 80%;
-            max-width: 600px;
-            text-align: center;
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .title {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        .progress-wrapper {
-            width: 100%;
-            background-color: #e0e0e0;
-            border-radius: 10px;
-            overflow: hidden;
-            height: 30px;
-            margin: 20px 0;
-        }
-        .progress-bar {
-            width: 0;
-            height: 100%;
-            background-color: #4caf50;
-            animation: progressAnimation 1000s linear infinite;
-        }
-        .status {
-            margin-top: 10px;
-            font-size: 18px;
-        }
-        @keyframes progressAnimation {
-            0% {
-                width: 0;
-            }
-            100% {
-                width: 100%;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carteira Digital</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="container">
+    <header>
+      <h1>Carteira</h1>
+    </header>
 
-<div class="container">
-    <div class="title">Transferência de Arquivos</div>
-    <div class="progress-wrapper">
-        <div class="progress-bar"></div>
-    </div>
-    <div class="status">Transferindo... (tempo restante: 9h)</div>
-</div>
+    <main>
+      <div class="saldo-box">
+        <p class="label">Saldo disponível</p>
+        <p class="valor">R$ 4.856,56</p>
+      </div>
 
+      <div class="acoes">
+        <button>Adicionar</button>
+        <button>Retirar</button>
+        <button>Ver extrato</button>
+      </div>
+    </main>
+  </div>
 </body>
 </html>
