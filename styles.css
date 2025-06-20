@@ -96,34 +96,54 @@ header h1 {
 }
 
 
-.cartao-box {
-  background-color: #f0f4ff;
+.cartao-credito {
+  background: linear-gradient(135deg, #ffffff, #f3f4f6);
+  border: 1px solid #dcdde1;
+  border-radius: 16px;
   padding: 20px;
-  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   margin-bottom: 20px;
 }
 
-.cartao-info {
+.cartao-topo {
+  margin-bottom: 12px;
+}
+
+.titulo-cartao {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2f3542;
+}
+
+.cartao-detalhes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.linha-info {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
   font-size: 14px;
+  color: #57606f;
 }
 
 .valor-usado {
   color: #ff4757;
+  font-weight: 600;
 }
 
 .barra-limite {
-  background-color: #dfe4ea;
+  position: relative;
   height: 8px;
+  background-color: #dfe4ea;
   border-radius: 4px;
   overflow: hidden;
+  margin-top: 10px;
 }
 
 .barra-uso {
   background-color: #ff6b81;
   height: 100%;
-  width: 0%;
-  transition: width 0.3s ease-in-out;
+  transition: width 0.4s ease-in-out;
 }
