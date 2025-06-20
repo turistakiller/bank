@@ -94,3 +94,36 @@ header h1 {
   width: 100%;
   text-align: center;
 }
+
+
+.cartao-box {
+  background-color: #f0f4ff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.cartao-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.valor-usado {
+  color: #ff4757;
+}
+
+.barra-limite {
+  background-color: #dfe4ea;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.barra-uso {
+  background-color: #ff6b81;
+  height: 100%;
+  width: 0%;
+  transition: width 0.3s ease-in-out;
+}
